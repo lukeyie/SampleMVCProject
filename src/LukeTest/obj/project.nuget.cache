@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "UNmyXgX8hwU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\luke.chen\\Documents\\Luke\\SampleMVCProject\\src\\LukeTest\\LukeTest.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\luke.chen\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

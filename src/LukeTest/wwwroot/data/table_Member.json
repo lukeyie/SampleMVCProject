@@ -1,0 +1,30 @@
+[
+    {
+      "Id": 1,
+      "Username": "Alex888",
+      "Password": "abc888",
+      "FullName": "王小華",
+      "Email": "alexwang@gmail.com"
+    },
+    {
+      "Id": 2,
+      "Username": "Bonny456",
+      "Password": "xyz456",
+      "FullName": "劉小妤",
+      "Email": "bonnyliu@gmail.com"
+    },
+    {
+      "Id": 3,
+      "Username": "Cody777",
+      "Password": "orz777",
+      "FullName": "陳大天",
+      "Email": "codychen@gmail.com"
+    },
+    {
+      "Id": 4,
+      "Username": "Emily333",
+      "Password": "1234567",
+      "FullName": "張艾莉",
+      "Email": "123321@gmail.com"
+    }
+  ]

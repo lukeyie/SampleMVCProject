@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "ProductCode": "A0001",
+    "ProductName": "Nintendo Switch",
+    "Price": 15000,
+    "Image": "nintendo_switch.jpg"
+  },
+  {
+    "Id": 2,
+    "ProductCode": "A0002",
+    "ProductName": "Switch 遙控器",
+    "Price": 2000,
+    "Image": "switch_controller.jpg"
+  },
+  {
+    "Id": 3,
+    "ProductCode": "A0003",
+    "ProductName": "健身環(含遊戲片)",
+    "Price": 5000,
+    "Image": "ringfit.jpg"
+  },
+  {
+    "Id": 4,
+    "ProductCode": "B0001",
+    "ProductName": "小米掃地機器人",
+    "Price": 8500,
+    "Image": "xiaomi_cleanrobot.jpg"
+  },
+  {
+    "Id": 5,
+    "ProductCode": "B0002",
+    "ProductName": "小米遠端監視器",
+    "Price": 6000,
+    "Image": "xiaomi_remote_monitor.jpg"
+  },
+  {
+    "Id": 6,
+    "ProductCode": "B0003",
+    "ProductName": "小米手環6",
+    "Price": 900,
+    "Image": "xiaomi_smartring_6.jpg"
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "Id": 1,
+    "Guid": "afe842be-fbdb-48ab-a622-c92cc76f6c6b",
+    "Username": "Alex888",
+    "ProductCode": "A0001",
+    "ProductName": "Nintendo Switch",
+    "Price": 15000,
+    "Quantity": 1,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 2,
+    "Guid": "0ae6471c-10b4-4059-951b-92d89d574e82",
+    "Username": "Alex888",
+    "ProductCode": "A0002",
+    "ProductName": "Switch 遙控器",
+    "Price": 2000,
+    "Quantity": 1,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 3,
+    "Guid": "59eb333f-2093-4d9f-ae38-09ca8473b6a1",
+    "Username": "Bonny456",
+    "ProductCode": "A0003",
+    "ProductName": "健身環(含遊戲片)",
+    "Price": 5000,
+    "Quantity": 1,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 4,
+    "Guid": "57e8cd8b-65b1-4d10-82a2-c716d3667c61",
+    "Username": "Bonny456",
+    "ProductCode": "B0001",
+    "ProductName": "小米掃地機器人",
+    "Price": 8500,
+    "Quantity": 1,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 5,
+    "Guid": "6ca0bfbd-0993-4f2a-aa57-efee4b3aca54",
+    "Username": "Bonny456",
+    "ProductCode": "B0002",
+    "ProductName": "小米遠端監視器",
+    "Price": 6000,
+    "Quantity": 2,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 6,
+    "Guid": "2f3923ff-0d27-4f09-9944-5925ec9c0413",
+    "Username": "Cody777",
+    "ProductCode": "B0002",
+    "ProductName": "小米遠端監視器",
+    "Price": 6000,
+    "Quantity": 1,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 7,
+    "Guid": "9cd9272a-a59a-4fd0-9854-c42ece2b9a96",
+    "Username": "Cody777",
+    "ProductCode": "B0003",
+    "ProductName": "小米手環6",
+    "Price": 900,
+    "Quantity": 5,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 8,
+    "Guid": "566255c6-62ef-43c7-aae2-9605f17aa40f",
+    "Username": "Cody777",
+    "ProductCode": "A0003",
+    "ProductName": "健身環(含遊戲片)",
+    "Price": 5000,
+    "Quantity": 2,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 9,
+    "Guid": "4ed05621-d7fb-4e84-8745-c7515d13b70b",
+    "Username": "Emily333",
+    "ProductCode": "A0001",
+    "ProductName": "Nintendo Switch",
+    "Price": 15000,
+    "Quantity": 4,
+    "IsApproved": "是"
+  }
+]
