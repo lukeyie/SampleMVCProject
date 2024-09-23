@@ -1,10 +1,5 @@
 using LukeTest.Models;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 
 namespace LukeTest.Data.Repositories
 {
@@ -17,17 +12,17 @@ namespace LukeTest.Data.Repositories
             _filePath = Path.Combine(webHostEnvironment.WebRootPath, "data", "table_Order.json");
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrdersAsync()
+        public async Task<IEnumerable<OrderDAO>> GetAllOrdersAsync()
         {
             var jsonData = await File.ReadAllTextAsync(_filePath);
-            var orders = JsonConvert.DeserializeObject<IEnumerable<Order>>(jsonData);
+            var orders = JsonConvert.DeserializeObject<IEnumerable<OrderDAO>>(jsonData) ?? Enumerable.Empty<OrderDAO>();
             return orders;
         }
 
-        public async Task<Order> GetOrderByIdAsync(int id)
+        public async Task<OrderDAO> GetOrderByIdAsync(int id)
         {
             var orders = await GetAllOrdersAsync();
-            return orders.FirstOrDefault(o => o.Id == id);
+            return orders.FirstOrDefault(o => o.Id == id) ?? new OrderDAO();
         }
     }
 }

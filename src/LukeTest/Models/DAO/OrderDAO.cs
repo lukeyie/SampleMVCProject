@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LukeTest.Models
 {
-    public class Order
+    public class OrderDAO
     {
         public int Id { get; set; }
 

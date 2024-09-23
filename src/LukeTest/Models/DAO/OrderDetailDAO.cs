@@ -2,7 +2,7 @@ namespace LukeTest.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class OrderDetail
+    public class OrderDetailDAO
     {
         public int Id { get; set; }
 

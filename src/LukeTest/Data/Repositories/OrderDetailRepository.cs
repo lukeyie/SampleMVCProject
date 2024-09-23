@@ -17,17 +17,17 @@ namespace LukeTest.Data.Repositories
             _filePath = Path.Combine(webHostEnvironment.WebRootPath, "data", "table_OrderDetail.json");
         }
 
-        public async Task<IEnumerable<OrderDetail>> GetAllOrderDetailsAsync()
+        public async Task<IEnumerable<OrderDetailDAO>> GetAllOrderDetailsAsync()
         {
             var jsonData = await File.ReadAllTextAsync(_filePath);
-            var orderDetails = JsonConvert.DeserializeObject<IEnumerable<OrderDetail>>(jsonData);
+            var orderDetails = JsonConvert.DeserializeObject<IEnumerable<OrderDetailDAO>>(jsonData) ?? new List<OrderDetailDAO>();
             return orderDetails;
         }
 
-        public async Task<OrderDetail> GetOrderDetailByIdAsync(int id)
+        public async Task<OrderDetailDAO> GetOrderDetailByIdAsync(int id)
         {
             var orderDetails = await GetAllOrderDetailsAsync();
-            return orderDetails.FirstOrDefault(od => od.Id == id);
+            return orderDetails.FirstOrDefault(od => od.Id == id) ?? new OrderDetailDAO();
         }
     }
 }

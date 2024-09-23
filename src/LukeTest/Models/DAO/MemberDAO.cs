@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LukeTest.Models
 {
-    public class Member
+    public class MemberDAO
     {
-        public int Id { get; set; }
-
         [Required]
         [DisplayName("帳號")]
         public required string Username { get; set; }

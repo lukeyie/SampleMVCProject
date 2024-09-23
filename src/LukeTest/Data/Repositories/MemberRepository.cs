@@ -17,17 +17,25 @@ namespace LukeTest.Data.Repositories
             _filePath = Path.Combine(webHostEnvironment.WebRootPath, "data", "table_Member.json");
         }
 
-        public async Task<IEnumerable<Member>> GetAllMembersAsync()
+        public async Task<IEnumerable<MemberDAO>> GetAllMembersAsync()
         {
             var jsonData = await File.ReadAllTextAsync(_filePath);
-            var members = JsonConvert.DeserializeObject<IEnumerable<Member>>(jsonData);
+            var members = JsonConvert.DeserializeObject<IEnumerable<MemberDAO>>(jsonData);
             return members;
         }
 
-        public async Task<Member> GetMemberByIdAsync(int id)
+        public async Task<MemberDAO> GetMemberByUsernameAsync(string username)
         {
             var members = await GetAllMembersAsync();
-            return members.FirstOrDefault(m => m.Id == id);
+            return members.FirstOrDefault(m => m.Username == username);
+        }
+
+        public async Task AddMemberAsync(MemberDAO newMember)
+        {
+            var members = (await GetAllMembersAsync()).ToList();
+            members.Add(newMember);
+            var jsonData = JsonConvert.SerializeObject(members, Formatting.Indented);
+            await File.WriteAllTextAsync(_filePath, jsonData);
         }
     }
 }

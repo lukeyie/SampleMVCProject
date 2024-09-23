@@ -12,14 +12,14 @@ namespace LukeTest.Data.Repositories
             _filePath = Path.Combine(webHostEnvironment.WebRootPath, "data", "table_Product.json");
         }
 
-        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        public async Task<IEnumerable<ProductDAO>> GetAllProductsAsync()
         {
             var jsonData = await File.ReadAllTextAsync(_filePath);
-            var products = JsonConvert.DeserializeObject<IEnumerable<Product>>(jsonData);
+            var products = JsonConvert.DeserializeObject<IEnumerable<ProductDAO>>(jsonData);
             return products;
         }
 
-        public async Task<Product> GetProductByIdAsync(int id)
+        public async Task<ProductDAO> GetProductByIdAsync(int id)
         {
             var products = await GetAllProductsAsync();
             return products.FirstOrDefault(p => p.Id == id);

@@ -6,7 +6,7 @@ namespace LukeTest.Data.Repositories
 {
     public interface IProductRepository
     {
-        Task<IEnumerable<Product>> GetAllProductsAsync();
-        Task<Product> GetProductByIdAsync(int id);
+        Task<IEnumerable<ProductDAO>> GetAllProductsAsync();
+        Task<ProductDAO> GetProductByIdAsync(int id);
     }
 }

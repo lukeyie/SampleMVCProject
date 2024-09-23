@@ -6,7 +6,7 @@ namespace LukeTest.Data.Repositories
 {
     public interface IOrderRepository
     {
-        Task<IEnumerable<Order>> GetAllOrdersAsync();
-        Task<Order> GetOrderByIdAsync(int id);
+        Task<IEnumerable<OrderDAO>> GetAllOrdersAsync();
+        Task<OrderDAO> GetOrderByIdAsync(int id);
     }
 }

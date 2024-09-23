@@ -2,7 +2,7 @@ namespace LukeTest.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Product
+    public class ProductDAO
     {
         public int Id { get; set; }
 

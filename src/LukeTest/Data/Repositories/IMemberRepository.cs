@@ -6,7 +6,8 @@ namespace LukeTest.Data.Repositories
 {
     public interface IMemberRepository
     {
-        Task<IEnumerable<Member>> GetAllMembersAsync();
-        Task<Member> GetMemberByIdAsync(int id);
+        Task<IEnumerable<MemberDAO>> GetAllMembersAsync();
+        Task<MemberDAO> GetMemberByUsernameAsync(string username);
+        Task AddMemberAsync(MemberDAO newMember);
     }
 }
