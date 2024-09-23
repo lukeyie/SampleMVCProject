@@ -21,5 +21,9 @@ namespace LukeTest.Models
         [DisplayName("電子信箱")]
         [EmailAddress]
         public required string Email { get; set; }
+
+        [Required]
+        [DisplayName("年紀")]
+        public required int Age { get; set; }
     }
 }
