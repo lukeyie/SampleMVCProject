@@ -55,4 +55,26 @@ public class HomeController : Controller
         ViewBag.Message = "帳號已被使用，請重新註冊";
         return View(new RegisterViewModel { member = viewModel.member });
     }
+
+    [HttpGet]
+    public IActionResult Login()
+    {
+        LoginViewModel viewModel = new();
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Login(string userId, string password)
+    {
+        //找出符合登入帳號與密碼的 Member資料
+        MemberDAO member = await _memberRepository.GetMemberByUsernameAndPasswordAsync(userId, password);
+        if (member == null)
+        {
+            return View(new LoginViewModel() {errorMessage = "帳號or密碼錯誤，請重新確認登入"});
+        }
+
+        HttpContext.Session.SetString("Welcome", $"{member.FullName} 您好");
+
+        return RedirectToAction("Index", "Member");
+    }
 }

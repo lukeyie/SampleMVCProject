@@ -29,6 +29,11 @@ namespace LukeTest.Data.Repositories
             var members = await GetAllMembersAsync();
             return members.FirstOrDefault(m => m.Username == username);
         }
+        public async Task<MemberDAO> GetMemberByUsernameAndPasswordAsync(string username, string password)
+        {
+            var members = await GetAllMembersAsync();
+            return members.FirstOrDefault(m => m.Username == username && m.Password == password);
+        }
 
         public async Task AddMemberAsync(MemberDAO newMember)
         {

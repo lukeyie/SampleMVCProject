@@ -8,6 +8,7 @@ namespace LukeTest.Data.Repositories
     {
         Task<IEnumerable<MemberDAO>> GetAllMembersAsync();
         Task<MemberDAO> GetMemberByUsernameAsync(string username);
+        Task<MemberDAO> GetMemberByUsernameAndPasswordAsync(string username, string password);
         Task AddMemberAsync(MemberDAO newMember);
     }
 }
