@@ -30,7 +30,7 @@ namespace LukeTest.Data.Repositories
             var orders = GetAllOrdersAsync().Result.ToList();
             order.Id = orders.Count == 0 ? 1 : orders.Max(o => o.Id) + 1;
             orders.Add(order);
-            var jsonData = JsonConvert.SerializeObject(orders);
+            var jsonData = JsonConvert.SerializeObject(orders, Formatting.Indented);
             File.WriteAllText(_filePath, jsonData);
             return true;
         }

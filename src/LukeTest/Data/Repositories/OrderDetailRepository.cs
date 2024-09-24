@@ -35,7 +35,7 @@ namespace LukeTest.Data.Repositories
                 orderDetail.IsApproved = "是";
                 orderDetail.Guid = orderGuid;
             }
-            var jsonData = JsonConvert.SerializeObject(orderDetails);
+            var jsonData = JsonConvert.SerializeObject(orderDetails, Formatting.Indented);
             File.WriteAllText(_filePath, jsonData);
             return true;
         }
