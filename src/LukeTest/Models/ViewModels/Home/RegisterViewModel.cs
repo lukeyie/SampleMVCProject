@@ -1,6 +1,4 @@
-using LukeTest.Models;
-
-namespace LukeTest.ViewModels
+namespace LukeTest.Models.ViewModels
 {
     public class HomeRegisterViewModel
     {

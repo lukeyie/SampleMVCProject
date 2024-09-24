@@ -7,6 +7,6 @@ namespace LukeTest.Data.Repositories
     public interface IOrderDetailRepository
     {
         Task<IEnumerable<OrderDetailDAO>> GetAllOrderDetailsAsync();
-        Task<OrderDetailDAO> GetOrderDetailByIdAsync(int id);
+        Task<IEnumerable<OrderDetailDAO>> GetOrderDetailsByUserIdAndIsApprovedAsync(string userId, bool isApproved);
     }
 }

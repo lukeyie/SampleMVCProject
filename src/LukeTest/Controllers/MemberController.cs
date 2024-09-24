@@ -1,5 +1,5 @@
 using LukeTest.Services;
-using LukeTest.ViewModels;
+using LukeTest.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,14 +9,16 @@ namespace LukeTest.Controllers
     public class MemberController : Controller
     {
         private readonly ILogger<MemberController> _logger;
-        private readonly IProductService _productService;
         private readonly IAuthenticationService _authenticationService;
+        private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
 
-        public MemberController(ILogger<MemberController> logger, IProductService productService, IAuthenticationService authenticationService)
+        public MemberController(ILogger<MemberController> logger, IAuthenticationService authenticationService, IProductService productService, IOrderService orderService)
         {
             _logger = logger;
             _productService = productService;
             _authenticationService = authenticationService;
+            _orderService = orderService;
         }
 
         public async Task<ActionResult> Index()
@@ -37,6 +39,15 @@ namespace LukeTest.Controllers
         {
             await _authenticationService.SignOutAsync();
             return RedirectToAction("Login", "Home");
+        }
+
+        public ActionResult ShoppingCart()
+        {
+            MemberShoppingCartViewModel viewModel = new();
+            string userId = User.Identity.Name;
+
+            viewModel.OrderDetails = _orderService.GetOrderDetailByUserId(userId, false);
+            return View(viewModel);
         }
     }
 }

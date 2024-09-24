@@ -25,6 +25,6 @@ namespace LukeTest.Models
         public int Quantity { get; set; }
 
         [Display(Name = "是否形成訂單")]
-        public bool IsApproved { get; set; }
+        public string IsApproved { get; set; }
     }
 }

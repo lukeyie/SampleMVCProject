@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using LukeTest.Models;
-using LukeTest.ViewModels;
+using LukeTest.Models.ViewModels;
 using LukeTest.Services;
 
 namespace LukeTest.Controllers;

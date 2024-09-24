@@ -24,10 +24,11 @@ namespace LukeTest.Data.Repositories
             return orderDetails;
         }
 
-        public async Task<OrderDetailDAO> GetOrderDetailByIdAsync(int id)
+        public async Task<IEnumerable<OrderDetailDAO>> GetOrderDetailsByUserIdAndIsApprovedAsync(string userId, bool isApproved)
         {
-            var orderDetails = await GetAllOrderDetailsAsync();
-            return orderDetails.FirstOrDefault(od => od.Id == id) ?? new OrderDetailDAO();
+            IEnumerable<OrderDetailDAO> orderDetails = await GetAllOrderDetailsAsync();
+            string isApprovedStr = isApproved ? "是" : "否";
+            return orderDetails.Where(od => od.Username == userId && od.IsApproved == isApprovedStr);
         }
     }
 }

@@ -1,0 +1,69 @@
+@model LukeTest.Models.ViewModels.MemberShoppingCartViewModel;
+@{
+    Layout = "_MemberLayout";
+    var firstOrderDetail = Model.OrderDetails.FirstOrDefault();
+}
+
+<h2>ShoppingCart</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => firstOrderDetail.Guid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => firstOrderDetail.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => firstOrderDetail.ProductCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => firstOrderDetail.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => firstOrderDetail.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => firstOrderDetail.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => firstOrderDetail.IsApproved)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.OrderDetails) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Guid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsApproved)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

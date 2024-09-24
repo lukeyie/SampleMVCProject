@@ -21,6 +21,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddHttpContextAccessor();
 builder.Services
     .AddScoped<IProductService, ProductService>()
+    .AddScoped<IOrderService, OrderService>()
     .AddScoped<IAccountService, AccountService>()
     .AddScoped<IAuthenticationService, AuthenticationService>()
     .AddScoped<IProductRepository, ProductRepository>()
