@@ -1,7 +1,5 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using LukeTest.Models;
-using LukeTest.Data.Repositories;
 using LukeTest.ViewModels;
 using LukeTest.Services;
 
@@ -12,25 +10,25 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IProductService _productService;
     private readonly IAccountService _accountService;
+    private readonly IAuthenticationService _authenticationService;
 
-    public HomeController(ILogger<HomeController> logger, IProductService productService, IAccountService accountService)
+    public HomeController(ILogger<HomeController> logger, IProductService productService, IAccountService accountService, IAuthenticationService authenticationService)
     {
         _logger = logger;
         _productService = productService;
         _accountService = accountService;
+        _authenticationService = authenticationService;
     }
 
     public async Task<IActionResult> Index()
     {
-        HomeViewModel viewModel = new();
-        IEnumerable<ProductDAO> products = await _productService.GetAllProductsAsync();
-        if(products == null)
+        HomeIndexViewModel viewModel = new();
+        viewModel.Products = await _productService.GetAllProductsAsync();
+        if(viewModel.Products == null)
         {
             ViewBag.Message = "目前沒有商品";
             return View(viewModel);
         }
-        
-        viewModel.Products = products;
 
         return View(viewModel);
     }
@@ -38,12 +36,12 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Register()
     {
-        RegisterViewModel viewModel = new();
+        HomeRegisterViewModel viewModel = new();
         return View(viewModel);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(RegisterViewModel viewModel)
+    public async Task<IActionResult> Register(HomeRegisterViewModel viewModel)
     {
         //如果資料驗證未通過則回傳原本的View
         if (!ModelState.IsValid)
@@ -55,7 +53,7 @@ public class HomeController : Controller
         if(!await _accountService.RegisterMemberAsync(viewModel.member))
         {
             ViewBag.Message = "帳號已被使用，請重新註冊";
-            return View(new RegisterViewModel { member = viewModel.member });
+            return View(new HomeRegisterViewModel { member = viewModel.member });
         }
 
         return RedirectToAction("Login");
@@ -64,7 +62,7 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Login()
     {
-        LoginViewModel viewModel = new();
+        HomeLoginViewModel viewModel = new();
         return View(viewModel);
     }
 
@@ -75,10 +73,11 @@ public class HomeController : Controller
         MemberDAO member = await _accountService.GetMemberByUsernameAndPasswordAsync(userId, password);
         if (member == null)
         {
-            return View(new LoginViewModel() {errorMessage = "帳號or密碼錯誤，請重新確認登入"});
+            return View(new HomeLoginViewModel() {errorMessage = "帳號or密碼錯誤，請重新確認登入"});
         }
 
         HttpContext.Session.SetString("Welcome", $"{member.FullName} 您好");
+        await _authenticationService.SignInAsync(userId);
         
         return RedirectToAction("Index", "Member");
     }

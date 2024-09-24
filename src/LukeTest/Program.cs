@@ -1,5 +1,6 @@
 using LukeTest.Data.Repositories;
 using LukeTest.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,15 +14,19 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Register services
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddCookie(o => o.LoginPath = new PathString("/Home/Login"));
 
-// Register repositories
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IMemberRepository, MemberRepository>();
-builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+// Register services
+builder.Services.AddHttpContextAccessor();
+builder.Services
+    .AddScoped<IProductService, ProductService>()
+    .AddScoped<IAccountService, AccountService>()
+    .AddScoped<IAuthenticationService, AuthenticationService>()
+    .AddScoped<IProductRepository, ProductRepository>()
+    .AddScoped<IMemberRepository, MemberRepository>()
+    .AddScoped<IOrderDetailRepository, OrderDetailRepository>()
+    .AddScoped<IOrderRepository, OrderRepository>();
 
 var app = builder.Build();
 
@@ -42,8 +47,6 @@ app.UseAuthorization();
 
 app.UseSession();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
 
 app.Run();

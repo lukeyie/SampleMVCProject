@@ -2,7 +2,7 @@ using LukeTest.Models;
 
 namespace LukeTest.ViewModels
 {
-    public class RegisterViewModel
+    public class HomeRegisterViewModel
     {
         public MemberDAO? member { get; set; }
 

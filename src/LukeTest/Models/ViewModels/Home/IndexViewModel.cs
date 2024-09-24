@@ -2,7 +2,7 @@ using LukeTest.Models;
 
 namespace LukeTest.ViewModels
 {
-    public class HomeViewModel
+    public class HomeIndexViewModel
     {
         public IEnumerable<ProductDAO> Products { get; set; } = new List<ProductDAO>();
         public string PriceTitleText = "單價";
