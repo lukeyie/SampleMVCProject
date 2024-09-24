@@ -8,5 +8,6 @@ namespace LukeTest.Data.Repositories
     {
         Task<IEnumerable<OrderDAO>> GetAllOrdersAsync();
         Task<OrderDAO> GetOrderByIdAsync(int id);
+        bool CreateOrder(OrderDAO order);
     }
 }

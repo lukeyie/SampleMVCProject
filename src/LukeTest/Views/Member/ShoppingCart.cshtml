@@ -56,14 +56,14 @@
                 @Html.DisplayFor(modelItem => item.IsApproved)
             </td>
             <td>
-                <a href="@Url.Action("DeleteCar")?Id=@item.Id"
-                class="btn btn-danger" onclick="return confirm(@Model.GetDeleteConfirmationText(item.ProductName))">@Model.DeleteButtonText</a>
+                <a href="@Url.Action("DeleteCart")?Id=@item.Id"
+                class="btn btn-danger" onclick="return confirm('@Model.GetDeleteConfirmationText(item.ProductName)')">@Model.DeleteButtonText</a>
             </td>
         </tr>
     }
 </table>
 
-<form action="@Url.Action("ShoppingCar")" method="post">
+<form action="@Url.Action("ShoppingCart")" method="post">
     <div class="form-horizontal">
         <h4>@Model.RecipientTitleText</h4>
         <hr />

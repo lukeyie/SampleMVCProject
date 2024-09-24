@@ -41,6 +41,7 @@ namespace LukeTest.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        [HttpGet]
         public ActionResult ShoppingCart()
         {
             MemberShoppingCartViewModel viewModel = new();
@@ -48,6 +49,14 @@ namespace LukeTest.Controllers
 
             viewModel.OrderDetails = _orderService.GetOrderDetailByUserId(userId, false);
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult ShoppingCart(string receiver, string email, string address)
+        {
+            string userId = User.Identity.Name;
+            _orderService.AddCartToOrder(userId, receiver, email, address);
+            return RedirectToAction("OrderList");
         }
     }
 }

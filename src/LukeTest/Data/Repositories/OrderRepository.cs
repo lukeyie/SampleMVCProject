@@ -24,5 +24,15 @@ namespace LukeTest.Data.Repositories
             var orders = await GetAllOrdersAsync();
             return orders.FirstOrDefault(o => o.Id == id) ?? new OrderDAO();
         }
+
+        public bool CreateOrder(OrderDAO order)
+        {
+            var orders = GetAllOrdersAsync().Result.ToList();
+            order.Id = orders.Count == 0 ? 1 : orders.Max(o => o.Id) + 1;
+            orders.Add(order);
+            var jsonData = JsonConvert.SerializeObject(orders);
+            File.WriteAllText(_filePath, jsonData);
+            return true;
+        }
     }
 }

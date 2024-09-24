@@ -1,10 +1,5 @@
 using LukeTest.Models;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 
 namespace LukeTest.Data.Repositories
 {
@@ -29,6 +24,20 @@ namespace LukeTest.Data.Repositories
             IEnumerable<OrderDetailDAO> orderDetails = await GetAllOrderDetailsAsync();
             string isApprovedStr = isApproved ? "是" : "否";
             return orderDetails.Where(od => od.Username == userId && od.IsApproved == isApprovedStr);
+        }
+
+        public async Task<bool> ApproveUserOrderDetails(string userId, string orderGuid)
+        {
+            IEnumerable<OrderDetailDAO> orderDetails = await GetAllOrderDetailsAsync();
+            IEnumerable<OrderDetailDAO> userOrderDetails = orderDetails.Where(od => od.Username == userId);
+            foreach(var orderDetail in userOrderDetails)
+            {
+                orderDetail.IsApproved = "是";
+                orderDetail.Guid = orderGuid;
+            }
+            var jsonData = JsonConvert.SerializeObject(orderDetails);
+            File.WriteAllText(_filePath, jsonData);
+            return true;
         }
     }
 }
