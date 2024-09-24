@@ -1,4 +1,5 @@
 using LukeTest.Data.Repositories;
+using LukeTest.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,10 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+// Register services
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 // Register repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
