@@ -4,11 +4,8 @@
     var firstOrderDetail = Model.OrderDetails.FirstOrDefault();
 }
 
-<h2>ShoppingCart</h2>
+<h2>@Model.PageTitleText</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -35,35 +32,67 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.OrderDetails) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Guid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsApproved)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model.OrderDetails) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsApproved)
+            </td>
+            <td>
+                <a href="@Url.Action("DeleteCar")?Id=@item.Id"
+                class="btn btn-danger" onclick="return confirm(@Model.GetDeleteConfirmationText(item.ProductName))">@Model.DeleteButtonText</a>
+            </td>
+        </tr>
+    }
 </table>
+
+<form action="@Url.Action("ShoppingCar")" method="post">
+    <div class="form-horizontal">
+        <h4>@Model.RecipientTitleText</h4>
+        <hr />
+
+        <div class="form-group">
+            <span class="control-label col-md-2">@Model.RecipientNameText</span>
+            <div class="col-md-10">
+                <input type="text" id="Receiver" name="Receiver" required="required" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">@Model.RecipientMailText</span>
+            <div class="col-md-10">
+                <input type="email" id="Email" name="Email" required="required" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="control-label col-md-2">@Model.RecipientAddressText</span>
+            <div class="col-md-10">
+                <input type="text" id="Address" name="Address" required="required" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value=@Model.RecipientFormSumbitText class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>

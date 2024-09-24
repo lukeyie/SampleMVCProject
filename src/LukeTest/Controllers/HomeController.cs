@@ -73,7 +73,7 @@ public class HomeController : Controller
         MemberDAO member = await _accountService.GetMemberByUsernameAndPasswordAsync(userId, password);
         if (member == null)
         {
-            return View(new HomeLoginViewModel() {errorMessage = "帳號or密碼錯誤，請重新確認登入"});
+            return View(new HomeLoginViewModel() {ErrorMessage = "帳號or密碼錯誤，請重新確認登入"});
         }
 
         HttpContext.Session.SetString("Welcome", $"{member.FullName} 您好");
