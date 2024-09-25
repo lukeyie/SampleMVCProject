@@ -1,6 +1,6 @@
-namespace LukeTest.Models.ViewModels
+namespace LukeTest.Models.ViewModels.Home
 {
-    public class HomeLoginViewModel
+    public class LoginViewModel
     {
         public string ErrorMessage { get; set; }
     }

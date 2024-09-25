@@ -1,8 +1,8 @@
 using LukeTest.Models.DAO;
 
-namespace LukeTest.Models.ViewModels
+namespace LukeTest.Models.ViewModels.Home
 {
-    public class HomeRegisterViewModel
+    public class RegisterViewModel
     {
         public MemberDAO? member { get; set; }
 

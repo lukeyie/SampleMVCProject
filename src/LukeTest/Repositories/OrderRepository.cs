@@ -20,10 +20,10 @@ namespace LukeTest.Repositories
             return orders;
         }
 
-        public async Task<OrderDAO> GetOrderByIdAsync(int id)
+        public async Task<IEnumerable<OrderDAO>> GetOrderByUserIdAsync(string userId)
         {
             var orders = await GetAllOrdersAsync();
-            return orders.FirstOrDefault(o => o.Id == id) ?? new OrderDAO();
+            return orders.Where(o => o.Username == userId);
         }
 
         public bool CreateOrder(OrderDAO order)

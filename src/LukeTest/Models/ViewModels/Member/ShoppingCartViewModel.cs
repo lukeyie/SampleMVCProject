@@ -1,8 +1,8 @@
 using LukeTest.Models.DAO;
 
-namespace LukeTest.Models.ViewModels
+namespace LukeTest.Models.ViewModels.Member
 {
-    public class MemberShoppingCartViewModel
+    public class ShoppingCartViewModel
     {
         public IEnumerable<OrderDetailDAO> OrderDetails { get; set; }
         public string PageTitleText = "會員購物車";

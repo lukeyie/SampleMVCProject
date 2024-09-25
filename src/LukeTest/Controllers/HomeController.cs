@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using LukeTest.Models.ViewModels;
+using LukeTest.Models.ViewModels.Home;
 using LukeTest.Interfaces.Services;
 using LukeTest.Models.DAO;
 
@@ -22,7 +22,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        HomeIndexViewModel viewModel = new();
+        IndexViewModel viewModel = new();
         viewModel.Products = await _productService.GetAllProductsAsync();
         if(viewModel.Products == null)
         {
@@ -36,12 +36,12 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Register()
     {
-        HomeRegisterViewModel viewModel = new();
+        RegisterViewModel viewModel = new();
         return View(viewModel);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(HomeRegisterViewModel viewModel)
+    public async Task<IActionResult> Register(RegisterViewModel viewModel)
     {
         //如果資料驗證未通過則回傳原本的View
         if (!ModelState.IsValid)
@@ -53,7 +53,7 @@ public class HomeController : Controller
         if(!await _accountService.RegisterMemberAsync(viewModel.member))
         {
             ViewBag.Message = "帳號已被使用，請重新註冊";
-            return View(new HomeRegisterViewModel { member = viewModel.member });
+            return View(new RegisterViewModel { member = viewModel.member });
         }
 
         return RedirectToAction("Login");
@@ -62,7 +62,7 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Login()
     {
-        HomeLoginViewModel viewModel = new();
+        LoginViewModel viewModel = new();
         return View(viewModel);
     }
 
@@ -73,7 +73,7 @@ public class HomeController : Controller
         MemberDAO member = await _accountService.GetMemberByUsernameAndPasswordAsync(userId, password);
         if (member == null)
         {
-            return View(new HomeLoginViewModel() {ErrorMessage = "帳號or密碼錯誤，請重新確認登入"});
+            return View(new LoginViewModel() {ErrorMessage = "帳號or密碼錯誤，請重新確認登入"});
         }
 
         HttpContext.Session.SetString("Welcome", $"{member.FullName} 您好");

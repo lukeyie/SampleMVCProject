@@ -1,7 +1,8 @@
-using LukeTest.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using LukeTest.Interfaces.Services;
+using LukeTest.Models.ViewModels.Member;
+using LukeTest.Models.ViewModels.Home;
 
 namespace LukeTest.Controllers
 {
@@ -23,7 +24,7 @@ namespace LukeTest.Controllers
 
         public async Task<ActionResult> Index()
         {
-            HomeIndexViewModel viewModel = new();
+            IndexViewModel viewModel = new();
             viewModel.Products = await _productService.GetAllProductsAsync();
             if(viewModel.Products == null)
             {
@@ -44,10 +45,10 @@ namespace LukeTest.Controllers
         [HttpGet]
         public ActionResult ShoppingCart()
         {
-            MemberShoppingCartViewModel viewModel = new();
+            ShoppingCartViewModel viewModel = new();
             string userId = User.Identity.Name;
 
-            viewModel.OrderDetails = _orderService.GetOrderDetailByUserId(userId, false);
+            viewModel.OrderDetails = _orderService.GetOrderDetailsByUserId(userId, false);
             return View(viewModel);
         }
 
@@ -57,6 +58,15 @@ namespace LukeTest.Controllers
             string userId = User.Identity.Name;
             _orderService.AddCartToOrder(userId, receiver, email, address);
             return RedirectToAction("OrderList");
+        }
+
+        public ActionResult OrderList()
+        {
+            OrderListViewModel viewModel = new();
+            string userId = User.Identity.Name;
+            viewModel.Orders = _orderService.GetOrdersByUserId(userId);
+
+            return View(viewModel);
         }
     }
 }

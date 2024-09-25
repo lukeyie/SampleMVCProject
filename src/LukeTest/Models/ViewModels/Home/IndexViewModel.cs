@@ -1,8 +1,8 @@
 using LukeTest.Models.DAO;
 
-namespace LukeTest.Models.ViewModels
+namespace LukeTest.Models.ViewModels.Home
 {
-    public class HomeIndexViewModel
+    public class IndexViewModel
     {
         public IEnumerable<ProductDAO> Products { get; set; } = new List<ProductDAO>();
         public string PriceTitleText = "單價";

@@ -1,0 +1,59 @@
+@model LukeTest.Models.ViewModels.Member.OrderListViewModel
+
+@{
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+    var firstOrderDetail = Model.Orders.FirstOrDefault();
+}
+
+<h2>@Model.PageTitleText</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.Guid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.Timestamp)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Orders.Any())
+        {
+            foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.Guid</td>
+                    <td>@order.Username</td>
+                    <td>@order.FullName</td>
+                    <td>@order.Email</td>
+                    <td>@order.Address</td>
+                    <td>@order.Timestamp</td>
+                    <td>
+                        <a href="@Url.Action("OrderDetail")?OrderGuid=@order.Guid" class="btn btn-info">@Model.OrderDetailButtonText</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">@Model.NoOrderText</td>
+            </tr>
+        }
+    </tbody>
+</table>
