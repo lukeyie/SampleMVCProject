@@ -48,7 +48,7 @@ namespace LukeTest.Controllers
             ShoppingCartViewModel viewModel = new();
             string userId = User.Identity.Name;
 
-            viewModel.OrderDetails = _orderService.GetOrderDetailsByUserId(userId, false);
+            viewModel.OrderDetails.Data = _orderService.GetOrderDetailsByUserId(userId, false);
             return View(viewModel);
         }
 
@@ -72,7 +72,7 @@ namespace LukeTest.Controllers
         public ActionResult OrderDetail(string OrderGuid)
         {
             OrderDetailViewModel viewModel = new();
-            viewModel.OrderDetails = _orderService.GetOrderDetailsByGuid(OrderGuid);
+            viewModel.OrderDetails.Data = _orderService.GetOrderDetailsByGuid(OrderGuid);
             return View(viewModel);
         }
     }

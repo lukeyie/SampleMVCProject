@@ -1,0 +1,46 @@
+@using System.Reflection
+@model LukeTest.Models.ViewModels.Partials.DynamicTablePartialViewModel;
+
+@{
+    IEnumerable<object> data = Model.Data;
+    var properties = new PropertyInfo[] { };
+    if (Model != null && data.Any())
+    {
+        var firstItem = data.First();
+        properties = firstItem.GetType().GetProperties();
+    }
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            @if (data != null && data.Any())
+            {
+                foreach (var prop in properties)
+                {
+                    <th>@prop.Name</th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (data != null && data.Any())
+        {
+            foreach (var item in data)
+            {
+                <tr>
+                    @foreach (var prop in properties)
+                    {
+                        <td>@prop.GetValue(item)</td>
+                    }
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="100%" class="text-center">@Model.EmptyDataText</td>
+            </tr>
+        }
+    </tbody>
+</table>
