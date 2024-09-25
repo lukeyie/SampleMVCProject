@@ -12,9 +12,12 @@
                 <div class="caption">
                     <h3>@item.ProductName</h3>
                     <h4>@Model.PriceTitleText:@item.Price</h4>
-                    <p>
-                        <a href="@Url.Action("AddCar","Member")?ProductId=@item.Id" class="btn btn-primary">@Model.AddCartText</a>
-                    </p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <p>
+                            <a href="@Url.Action("AddCart", "Home")?ProductId=@item.Id" class="btn btn-primary">@Model.AddCartText</a>
+                        </p>
+                    }
                 </div>
             </div>
         </div>

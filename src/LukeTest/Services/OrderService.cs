@@ -8,12 +8,14 @@ namespace LukeTest.Services
     public class OrderService : IOrderService
     {
         private readonly ILogger<OrderService> _logger;
+        private readonly IProductRepository _productRepository;
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderDetailRepository _orderDetailRepository;
         
-        public OrderService(ILogger<OrderService> logger, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
+        public OrderService(ILogger<OrderService> logger, IProductRepository productRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
         {
             _logger = logger;
+            _productRepository = productRepository;
             _orderRepository = orderRepository;
             _orderDetailRepository = orderDetailRepository;
         }
@@ -72,6 +74,33 @@ namespace LukeTest.Services
                 });
             }
             return orderDTOs;
+        }
+
+        public bool AddProductToCart(string userId, int productId)
+        {
+            ProductDAO product = _productRepository.GetProductByIdAsync(productId).Result;
+            if(product == null)
+            {
+                return false;
+            }
+
+            IEnumerable<OrderDetailDAO> currentCart = _orderDetailRepository.GetOrderDetailsByUserIdAndIsApprovedAsync(userId, false).Result;
+            OrderDetailDAO productDetail = currentCart.FirstOrDefault(od => od.ProductCode == product.ProductCode);
+            int currentQty = productDetail == null ? 0 : productDetail.Quantity;
+
+            OrderDetailDAO orderDetail = new OrderDetailDAO
+            {
+                Id = productDetail == null ? -1 : productDetail.Id,
+                Username = userId,
+                ProductCode = product.ProductCode,
+                ProductName = product.ProductName,
+                Price = product.Price,
+                Quantity = currentQty + 1,
+                IsApproved = "否"
+            };
+
+            _orderDetailRepository.UpdateOrderDetails(new List<OrderDetailDAO> { orderDetail });
+            return true;
         }
 
         public bool AddCartToOrder(string userId, string receiver, string email, string address)

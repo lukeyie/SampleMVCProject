@@ -9,13 +9,15 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IProductService _productService;
+    private readonly IOrderService _orderService;
     private readonly IAccountService _accountService;
     private readonly ICustomAuthenticationService _customAuthenticationService;
 
-    public HomeController(ILogger<HomeController> logger, IProductService productService, IAccountService accountService, ICustomAuthenticationService customAuthenticationService)
+    public HomeController(ILogger<HomeController> logger, IProductService productService, IOrderService orderService, IAccountService accountService, ICustomAuthenticationService customAuthenticationService)
     {
         _logger = logger;
         _productService = productService;
+        _orderService = orderService;
         _accountService = accountService;
         _customAuthenticationService = customAuthenticationService;
     }
@@ -31,6 +33,13 @@ public class HomeController : Controller
         }
 
         return View(viewModel);
+    }
+
+    [HttpGet]
+    public IActionResult AddCart(int productId) {
+        string userId = User.Identity.Name;
+        _orderService.AddProductToCart(userId, productId);
+        return RedirectToAction("Index", "Member");
     }
 
     [HttpGet]

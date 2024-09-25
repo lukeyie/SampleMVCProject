@@ -35,7 +35,27 @@ namespace LukeTest.Repositories
 
         public async Task<bool> UpdateOrderDetails(IEnumerable<OrderDetailDAO> orderDetails)
         {
-            var jsonData = JsonConvert.SerializeObject(orderDetails, Formatting.Indented);
+            IEnumerable<OrderDetailDAO> allOrderDetails = await GetAllOrderDetailsAsync();
+            List<OrderDetailDAO> tempAllOrderDetails = new List<OrderDetailDAO>(allOrderDetails);
+            int maxId = allOrderDetails.Max(od => od.Id);
+            Dictionary<int, OrderDetailDAO> orderDetailDict = orderDetails.ToDictionary(od => od.Id);
+            for(int i = 0; i < tempAllOrderDetails.Count(); i++)
+            {
+                if(orderDetailDict.ContainsKey(tempAllOrderDetails.ElementAt(i).Id))
+                {
+                    tempAllOrderDetails[i] = orderDetailDict[tempAllOrderDetails.ElementAt(i).Id];
+                    orderDetailDict.Remove(tempAllOrderDetails.ElementAt(i).Id);
+                }
+            }
+            
+            foreach(var kvp in orderDetailDict)
+            {
+                OrderDetailDAO tempDAO = kvp.Value;
+                tempDAO.Id = ++maxId;
+                tempAllOrderDetails.Add(tempDAO);
+            }
+
+            var jsonData = JsonConvert.SerializeObject(tempAllOrderDetails, Formatting.Indented);
             File.WriteAllText(_filePath, jsonData);
             return true;
         }
