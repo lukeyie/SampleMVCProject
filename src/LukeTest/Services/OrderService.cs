@@ -17,6 +17,11 @@ namespace LukeTest.Services
             _orderDetailRepository = orderDetailRepository;
         }
 
+        public IEnumerable<OrderDetailDAO> GetOrderDetailsByGuid(string guid)
+        {
+            return _orderDetailRepository.GetOrderDetailsByGuidAsync(guid).Result;
+        }
+
         public IEnumerable<OrderDetailDAO> GetOrderDetailsByUserId(string userId, bool IsApproved)
         {
             return _orderDetailRepository.GetOrderDetailsByUserIdAndIsApprovedAsync(userId, IsApproved).Result;

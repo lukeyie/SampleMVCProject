@@ -20,6 +20,12 @@ namespace LukeTest.Repositories
             return orderDetails;
         }
 
+        public async Task<IEnumerable<OrderDetailDAO>> GetOrderDetailsByGuidAsync(string guid)
+        {
+            IEnumerable<OrderDetailDAO> orderDetails = await GetAllOrderDetailsAsync();
+            return orderDetails.Where(od => od.Guid == guid);
+        }
+
         public async Task<IEnumerable<OrderDetailDAO>> GetOrderDetailsByUserIdAndIsApprovedAsync(string userId, bool isApproved)
         {
             IEnumerable<OrderDetailDAO> orderDetails = await GetAllOrderDetailsAsync();

@@ -64,8 +64,15 @@ namespace LukeTest.Controllers
         {
             OrderListViewModel viewModel = new();
             string userId = User.Identity.Name;
-            viewModel.Orders = _orderService.GetOrdersByUserId(userId);
+            viewModel.Orders = _orderService.GetOrdersByUserId(userId).OrderByDescending(m => m.Timestamp);
 
+            return View(viewModel);
+        }
+
+        public ActionResult OrderDetail(string OrderGuid)
+        {
+            OrderDetailViewModel viewModel = new();
+            viewModel.OrderDetails = _orderService.GetOrderDetailsByGuid(OrderGuid);
             return View(viewModel);
         }
     }
