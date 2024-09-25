@@ -1,6 +1,7 @@
 using LukeTest.Interfaces.Repositories;
 using LukeTest.Interfaces.Services;
 using LukeTest.Models.DAO;
+using LukeTest.Models.DTO;
 
 namespace LukeTest.Services
 {
@@ -17,19 +18,60 @@ namespace LukeTest.Services
             _orderDetailRepository = orderDetailRepository;
         }
 
-        public IEnumerable<OrderDetailDAO> GetOrderDetailsByGuid(string guid)
+        public IEnumerable<OrderDetailDTO> GetOrderDetailsByGuid(string guid)
         {
-            return _orderDetailRepository.GetOrderDetailsByGuidAsync(guid).Result;
+            IEnumerable<OrderDetailDAO> orderDetails = _orderDetailRepository.GetOrderDetailsByGuidAsync(guid).Result;
+            List<OrderDetailDTO> orderDetailDTOs = new();
+            foreach(var orderDetail in orderDetails)
+            {
+                orderDetailDTOs.Add(new OrderDetailDTO
+                {
+                    Guid = orderDetail.Guid,
+                    Username = orderDetail.Username,
+                    ProductCode = orderDetail.ProductCode,
+                    ProductName = orderDetail.ProductName,
+                    Price = orderDetail.Price,
+                    Quantity = orderDetail.Quantity,
+                    IsApproved = orderDetail.IsApproved
+                });
+            }
+            return orderDetailDTOs;
         }
 
-        public IEnumerable<OrderDetailDAO> GetOrderDetailsByUserId(string userId, bool IsApproved)
+        public IEnumerable<ShoppingCartDTO> GetShoppingCartInfo(string userId)
         {
-            return _orderDetailRepository.GetOrderDetailsByUserIdAndIsApprovedAsync(userId, IsApproved).Result;
+            IEnumerable<OrderDetailDAO> orderDetails = _orderDetailRepository.GetOrderDetailsByUserIdAndIsApprovedAsync(userId, false).Result;
+            List<ShoppingCartDTO> shoppingCartDTOs = new();
+            foreach(var orderDetail in orderDetails)
+            {
+                shoppingCartDTOs.Add(new ShoppingCartDTO
+                {
+                    ProductCode = orderDetail.ProductCode,
+                    ProductName = orderDetail.ProductName,
+                    Price = orderDetail.Price,
+                    Quantity = orderDetail.Quantity
+                });
+            }
+            return shoppingCartDTOs;
         }
 
-        public IEnumerable<OrderDAO> GetOrdersByUserId(string userId)
+        public IEnumerable<OrderDTO> GetOrdersByUserId(string userId)
         {
-            return _orderRepository.GetOrderByUserIdAsync(userId).Result;
+            IEnumerable<OrderDAO> orders = _orderRepository.GetOrderByUserIdAsync(userId).Result;
+            List<OrderDTO> orderDTOs = new();
+            foreach(var order in orders)
+            {
+                orderDTOs.Add(new OrderDTO
+                {
+                    Guid = order.Guid,
+                    Username = order.Username,
+                    FullName = order.FullName,
+                    Email = order.Email,
+                    Address = order.Address,
+                    Timestamp = order.Timestamp
+                });
+            }
+            return orderDTOs;
         }
 
         public bool AddCartToOrder(string userId, string receiver, string email, string address)

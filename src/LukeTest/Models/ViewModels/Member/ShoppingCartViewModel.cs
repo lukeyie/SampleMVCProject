@@ -1,4 +1,4 @@
-using LukeTest.Models.DAO;
+using LukeTest.Models.DTO;
 using LukeTest.Models.ViewModels.Partials;
 
 namespace LukeTest.Models.ViewModels.Member
@@ -7,7 +7,7 @@ namespace LukeTest.Models.ViewModels.Member
     {
         public DynamicTablePartialViewModel OrderDetails = new DynamicTablePartialViewModel() 
         { 
-            Data = new List<OrderDetailDAO>(), 
+            Data = new List<ShoppingCartDTO>(), 
             EmptyDataText = "目前購物車沒有商品" 
         };
         public string PageTitleText = "會員購物車";

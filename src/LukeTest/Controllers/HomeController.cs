@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using LukeTest.Models.ViewModels.Home;
 using LukeTest.Interfaces.Services;
-using LukeTest.Models.DAO;
+using LukeTest.Models.DTO;
 
 namespace LukeTest.Controllers;
 
@@ -70,7 +70,7 @@ public class HomeController : Controller
     public async Task<ActionResult> Login(string userId, string password)
     {
         //找出符合登入帳號與密碼的 Member資料
-        MemberDAO member = await _accountService.GetMemberByUsernameAndPasswordAsync(userId, password);
+        MemberDTO member = await _accountService.GetMemberByUsernameAndPasswordAsync(userId, password);
         if (member == null)
         {
             return View(new LoginViewModel() {ErrorMessage = "帳號or密碼錯誤，請重新確認登入"});

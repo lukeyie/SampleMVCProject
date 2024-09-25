@@ -1,12 +1,12 @@
-using LukeTest.Models.DAO;
+using LukeTest.Models.DTO;
 
 namespace LukeTest.Interfaces.Services
 {
     public interface IOrderService
     {
-        IEnumerable<OrderDetailDAO> GetOrderDetailsByGuid(string guid);
-        IEnumerable<OrderDetailDAO> GetOrderDetailsByUserId(string userId, bool IsApproved);
-        IEnumerable<OrderDAO> GetOrdersByUserId(string userId);
+        IEnumerable<OrderDetailDTO> GetOrderDetailsByGuid(string guid);
+        IEnumerable<ShoppingCartDTO> GetShoppingCartInfo(string userId);
+        IEnumerable<OrderDTO> GetOrdersByUserId(string userId);
         bool AddCartToOrder(string userId, string receiver, string email, string address);
         Task<bool> ApproveUserOrderDetails(string userId, string orderGuid);
     }

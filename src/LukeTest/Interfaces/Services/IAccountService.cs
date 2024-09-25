@@ -1,10 +1,10 @@
-using LukeTest.Models.DAO;
+using LukeTest.Models.DTO;
 
 namespace LukeTest.Interfaces.Services
 {
     public interface IAccountService
     {
-        Task<bool> RegisterMemberAsync(MemberDAO member);
-        Task<MemberDAO> GetMemberByUsernameAndPasswordAsync(string username, string password);
+        Task<bool> RegisterMemberAsync(MemberDTO member);
+        Task<MemberDTO> GetMemberByUsernameAndPasswordAsync(string username, string password);
     }
 }

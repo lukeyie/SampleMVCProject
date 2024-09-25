@@ -2,6 +2,7 @@
 using LukeTest.Interfaces.Repositories;
 using LukeTest.Interfaces.Services;
 using LukeTest.Models.DAO;
+using LukeTest.Models.DTO;
 
 namespace LukeTest.Services
 {
@@ -16,23 +17,40 @@ namespace LukeTest.Services
             _memberRepository = memberRepository;
         }
 
-        public async Task<bool> RegisterMemberAsync(MemberDAO member)
+        public async Task<bool> RegisterMemberAsync(MemberDTO member)
         {
             MemberDAO memberInDB = await _memberRepository.GetMemberByUsernameAsync(member.Username);
             if(memberInDB != null)
                 return false;
 
-            await _memberRepository.AddMemberAsync(member);
+            MemberDAO memberDAO = new()
+            {
+                Username = member.Username,
+                Password = member.Password,
+                Email = member.Email,
+                FullName = member.FullName,
+                Age = member.Age
+            };
+            await _memberRepository.AddMemberAsync(memberDAO);
             return true;
         }
 
-        public async Task<MemberDAO> GetMemberByUsernameAndPasswordAsync(string username, string password)
+        public async Task<MemberDTO> GetMemberByUsernameAndPasswordAsync(string username, string password)
         {
             MemberDAO member = await _memberRepository.GetMemberByUsernameAsync(username);
             if (member == null || member.Password != password)
                 return null;
+            
+            MemberDTO memberDTO = new()
+            {
+                Username = member.Username,
+                Password = member.Password,
+                Email = member.Email,
+                FullName = member.FullName,
+                Age = member.Age
+            };
 
-            return member;
+            return memberDTO;
         }
     }
 }

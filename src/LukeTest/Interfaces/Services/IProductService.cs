@@ -1,9 +1,9 @@
-using LukeTest.Models.DAO;
+using LukeTest.Models.DTO;
 
 namespace LukeTest.Interfaces.Services
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductDAO>> GetAllProductsAsync();
+        Task<IEnumerable<ProductDTO>> GetAllProductsAsync();
     }
 }

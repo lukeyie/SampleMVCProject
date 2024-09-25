@@ -48,7 +48,7 @@ namespace LukeTest.Controllers
             ShoppingCartViewModel viewModel = new();
             string userId = User.Identity.Name;
 
-            viewModel.OrderDetails.Data = _orderService.GetOrderDetailsByUserId(userId, false);
+            viewModel.OrderDetails.Data = _orderService.GetShoppingCartInfo(userId);
             return View(viewModel);
         }
 
