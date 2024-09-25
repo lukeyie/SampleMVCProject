@@ -1,6 +1,6 @@
-using LukeTest.Models;
+using LukeTest.Models.DAO;
 
-namespace LukeTest.Services
+namespace LukeTest.Interfaces.Services
 {
     public interface IProductService
     {

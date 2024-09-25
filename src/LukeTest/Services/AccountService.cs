@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LukeTest.Data.Repositories;
-using LukeTest.Models;
+
+using LukeTest.Interfaces.Repositories;
+using LukeTest.Interfaces.Services;
+using LukeTest.Models.DAO;
 
 namespace LukeTest.Services
 {

@@ -1,4 +1,6 @@
-using LukeTest.Data.Repositories;
+using LukeTest.Interfaces.Repositories;
+using LukeTest.Interfaces.Services;
+using LukeTest.Repositories;
 using LukeTest.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -23,7 +25,7 @@ builder.Services
     .AddScoped<IProductService, ProductService>()
     .AddScoped<IOrderService, OrderService>()
     .AddScoped<IAccountService, AccountService>()
-    .AddScoped<IAuthenticationService, AuthenticationService>()
+    .AddScoped<ICustomAuthenticationService, CustomAuthenticationService>()
     .AddScoped<IProductRepository, ProductRepository>()
     .AddScoped<IMemberRepository, MemberRepository>()
     .AddScoped<IOrderDetailRepository, OrderDetailRepository>()

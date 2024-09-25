@@ -1,12 +1,8 @@
-using LukeTest.Models;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+using LukeTest.Interfaces.Repositories;
+using LukeTest.Models.DAO;
 
-namespace LukeTest.Data.Repositories
+namespace LukeTest.Repositories
 {
     public class MemberRepository : IMemberRepository
     {

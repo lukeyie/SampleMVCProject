@@ -1,5 +1,6 @@
-using LukeTest.Models;
-namespace LukeTest.Data.Repositories
+using LukeTest.Models.DAO;
+
+namespace LukeTest.Interfaces.Repositories
 {
     public interface IOrderDetailRepository
     {

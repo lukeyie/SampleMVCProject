@@ -1,3 +1,5 @@
+using LukeTest.Models.DAO;
+
 namespace LukeTest.Models.ViewModels
 {
     public class MemberShoppingCartViewModel

@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LukeTest.Models;
+using LukeTest.Models.DAO;
 
-namespace LukeTest.Services
+namespace LukeTest.Interfaces.Services
 {
     public interface IOrderService
     {

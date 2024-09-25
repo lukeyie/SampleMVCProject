@@ -1,8 +1,6 @@
-using LukeTest.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using LukeTest.Models.DAO;
 
-namespace LukeTest.Data.Repositories
+namespace LukeTest.Interfaces.Repositories
 {
     public interface IOrderRepository
     {

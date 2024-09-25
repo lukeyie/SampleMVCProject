@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using LukeTest.Models;
 using LukeTest.Models.ViewModels;
-using LukeTest.Services;
+using LukeTest.Interfaces.Services;
+using LukeTest.Models.DAO;
 
 namespace LukeTest.Controllers;
 
@@ -10,14 +10,14 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IProductService _productService;
     private readonly IAccountService _accountService;
-    private readonly IAuthenticationService _authenticationService;
+    private readonly ICustomAuthenticationService _customAuthenticationService;
 
-    public HomeController(ILogger<HomeController> logger, IProductService productService, IAccountService accountService, IAuthenticationService authenticationService)
+    public HomeController(ILogger<HomeController> logger, IProductService productService, IAccountService accountService, ICustomAuthenticationService customAuthenticationService)
     {
         _logger = logger;
         _productService = productService;
         _accountService = accountService;
-        _authenticationService = authenticationService;
+        _customAuthenticationService = customAuthenticationService;
     }
 
     public async Task<IActionResult> Index()
@@ -77,7 +77,7 @@ public class HomeController : Controller
         }
 
         HttpContext.Session.SetString("Welcome", $"{member.FullName} 您好");
-        await _authenticationService.SignInAsync(userId);
+        await _customAuthenticationService.SignInAsync(userId);
         
         return RedirectToAction("Index", "Member");
     }

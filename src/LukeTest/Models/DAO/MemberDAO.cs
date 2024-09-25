@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace LukeTest.Models
+namespace LukeTest.Models.DAO
 {
     public class MemberDAO
     {

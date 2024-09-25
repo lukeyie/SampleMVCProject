@@ -1,7 +1,8 @@
-using LukeTest.Models;
+using LukeTest.Interfaces.Repositories;
+using LukeTest.Models.DAO;
 using Newtonsoft.Json;
 
-namespace LukeTest.Data.Repositories
+namespace LukeTest.Repositories
 {
     public class ProductRepository : IProductRepository
     {

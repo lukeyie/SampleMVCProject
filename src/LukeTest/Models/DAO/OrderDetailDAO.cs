@@ -1,4 +1,4 @@
-namespace LukeTest.Models
+namespace LukeTest.Models.DAO
 {
     using System.ComponentModel.DataAnnotations;
 

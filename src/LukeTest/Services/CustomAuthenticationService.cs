@@ -1,17 +1,15 @@
+using LukeTest.Interfaces.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace LukeTest.Services
 {
-    public class AuthenticationService : IAuthenticationService
+    public class CustomAuthenticationService : ICustomAuthenticationService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthenticationService(IHttpContextAccessor httpContextAccessor)
+        public CustomAuthenticationService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
