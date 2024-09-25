@@ -33,15 +33,8 @@ namespace LukeTest.Repositories
             return orderDetails.Where(od => od.Username == userId && od.IsApproved == isApprovedStr);
         }
 
-        public async Task<bool> ApproveUserOrderDetails(string userId, string orderGuid)
+        public async Task<bool> UpdateOrderDetails(IEnumerable<OrderDetailDAO> orderDetails)
         {
-            IEnumerable<OrderDetailDAO> orderDetails = await GetAllOrderDetailsAsync();
-            IEnumerable<OrderDetailDAO> userOrderDetails = orderDetails.Where(od => od.Username == userId);
-            foreach(var orderDetail in userOrderDetails)
-            {
-                orderDetail.IsApproved = "是";
-                orderDetail.Guid = orderGuid;
-            }
             var jsonData = JsonConvert.SerializeObject(orderDetails, Formatting.Indented);
             File.WriteAllText(_filePath, jsonData);
             return true;

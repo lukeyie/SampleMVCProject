@@ -35,7 +35,7 @@ namespace LukeTest.Services
         public bool AddCartToOrder(string userId, string receiver, string email, string address)
         {
             string orderGuid = Guid.NewGuid().ToString();
-            if(!_orderDetailRepository.ApproveUserOrderDetails(userId, orderGuid).Result)
+            if(!ApproveUserOrderDetails(userId, orderGuid).Result)
             {
                 return false;
             }
@@ -50,6 +50,19 @@ namespace LukeTest.Services
                 Timestamp = DateTime.Now.ToString()
             };
             return _orderRepository.CreateOrder(order);
+        }
+
+        public async Task<bool> ApproveUserOrderDetails(string userId, string orderGuid)
+        {
+            IEnumerable<OrderDetailDAO> orderDetails = await _orderDetailRepository.GetAllOrderDetailsAsync();
+            IEnumerable<OrderDetailDAO> userOrderDetails = orderDetails.Where(od => od.Username == userId && od.IsApproved == "否");
+            foreach(var orderDetail in userOrderDetails)
+            {
+                orderDetail.IsApproved = "是";
+                orderDetail.Guid = orderGuid;
+            }
+            _orderDetailRepository.UpdateOrderDetails(orderDetails);
+            return true;
         }
     }
 }

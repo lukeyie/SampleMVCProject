@@ -8,5 +8,6 @@ namespace LukeTest.Interfaces.Services
         IEnumerable<OrderDetailDAO> GetOrderDetailsByUserId(string userId, bool IsApproved);
         IEnumerable<OrderDAO> GetOrdersByUserId(string userId);
         bool AddCartToOrder(string userId, string receiver, string email, string address);
+        Task<bool> ApproveUserOrderDetails(string userId, string orderGuid);
     }
 }
