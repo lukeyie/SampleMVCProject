@@ -7,60 +7,66 @@
 <h2>@Model.PageTitleText</h2>
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => firstOrderDetail.Guid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => firstOrderDetail.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => firstOrderDetail.ProductCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => firstOrderDetail.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => firstOrderDetail.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => firstOrderDetail.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => firstOrderDetail.IsApproved)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.OrderDetails) {
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Guid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsApproved)
-            </td>
-            <td>
-                <a href="@Url.Action("DeleteCart")?Id=@item.Id"
-                class="btn btn-danger" onclick="return confirm('@Model.GetDeleteConfirmationText(item.ProductName)')">@Model.DeleteButtonText</a>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.ProductCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => firstOrderDetail.IsApproved)
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @if (Model.OrderDetails.Any())
+        {
+            foreach (var item in Model.OrderDetails)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsApproved)
+                    </td>
+                    <td>
+                    <a href="@Url.Action("DeleteCart")?Id=@item.Id"
+                    class="btn btn-danger" onclick="return confirm('@Model.GetDeleteConfirmationText(item.ProductName)')">@Model.DeleteButtonText</a>
+                </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">@Model.NoOrderDetailText</td>
+            </tr>
+        }
+    </tbody>
 </table>
 
 <form action="@Url.Action("ShoppingCart")" method="post">

@@ -34,17 +34,29 @@
     <tbody>
         @if (Model.Orders.Any())
         {
-            foreach (var order in Model.Orders)
+            foreach (var item in Model.Orders)
             {
                 <tr>
-                    <td>@order.Guid</td>
-                    <td>@order.Username</td>
-                    <td>@order.FullName</td>
-                    <td>@order.Email</td>
-                    <td>@order.Address</td>
-                    <td>@order.Timestamp</td>
                     <td>
-                        <a href="@Url.Action("OrderDetail")?OrderGuid=@order.Guid" class="btn btn-info">@Model.OrderDetailButtonText</a>
+                        @Html.DisplayFor(model => item.Guid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Timestamp)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("OrderDetail")?OrderGuid=@item.Guid" class="btn btn-info">@Model.OrderDetailButtonText</a>
                     </td>
                 </tr>
             }
