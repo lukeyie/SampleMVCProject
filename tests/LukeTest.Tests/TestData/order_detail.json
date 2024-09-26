@@ -1,0 +1,40 @@
+[
+  {
+    "Id": 1,
+    "Guid": "8a80769e-e0f0-4e35-8d2a-5401716b4158",
+    "Username": "johndoe",
+    "ProductCode": "B0002",
+    "ProductName": "小米遠端監視器",
+    "Price": 6000,
+    "Quantity": 1,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 2,
+    "Username": "luke",
+    "ProductCode": "B0002",
+    "ProductName": "小米遠端監視器",
+    "Price": 6000,
+    "Quantity": 1,
+    "IsApproved": "否"
+  },
+  {
+    "Id": 3,
+    "Guid": "9e86f3c4-fe1b-4885-b60e-97de96ce50e1",
+    "Username": "luke",
+    "ProductCode": "A0001",
+    "ProductName": "Nintendo Switch",
+    "Price": 15000,
+    "Quantity": 4,
+    "IsApproved": "是"
+  },
+  {
+    "Id": 4,
+    "Username": "luke",
+    "ProductCode": "B0001",
+    "ProductName": "小米掃地機器人",
+    "Price": 8500,
+    "Quantity": 1,
+    "IsApproved": "否"
+  }
+]

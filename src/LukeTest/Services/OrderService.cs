@@ -123,7 +123,7 @@ namespace LukeTest.Services
             return _orderRepository.CreateOrder(order);
         }
 
-        public async Task<bool> ApproveUserOrderDetails(string userId, string orderGuid)
+        public virtual async Task<bool> ApproveUserOrderDetails(string userId, string orderGuid)
         {
             IEnumerable<OrderDetailDAO> orderDetails = await _orderDetailRepository.GetAllOrderDetailsAsync();
             IEnumerable<OrderDetailDAO> userOrderDetails = orderDetails.Where(od => od.Username == userId && od.IsApproved == "否");
